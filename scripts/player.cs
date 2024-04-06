@@ -11,32 +11,37 @@ public partial class player : CharacterBody2D
 
   public override void _PhysicsProcess(double delta)
   {
-	var directions = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("move_up", "move_down"));
-	GD.Print(directions);
+    // // Add the gravity.
+    // if (!IsOnFloor())
+    //   velocity.Y += gravity * (float)delta;
 
-	// Vector2 velocity = Velocity;
+    // // Handle Jump.
+    // if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+    //   velocity.Y = JumpVelocity;
 
-	// // Add the gravity.
-	// if (!IsOnFloor())
-	//   velocity.Y += gravity * (float)delta;
+    // Get the input direction and handle the movement/deceleration.
+    // As good practice, you should replace UI actions with custom gameplay actions.
+    var direction = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("move_up", "move_down"));
+    var velocity = new Vector2
+    {
+      X = direction.X * Speed,
+      Y = direction.Y * Speed
+    };
+    // var velocity = new Vector2();
+    // if (direction != Vector2.Zero)
+    // {
+    //   velocity.X = direction.X * Speed;
+    //   GD.Print("if");
+    // }
+    // else
+    // {
+    //   velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+    //   GD.Print("else");
+    // }
 
-	// // Handle Jump.
-	// if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-	//   velocity.Y = JumpVelocity;
 
-	// // Get the input direction and handle the movement/deceleration.
-	// // As good practice, you should replace UI actions with custom gameplay actions.
-	// Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-	// if (direction != Vector2.Zero)
-	// {
-	//   velocity.X = direction.X * Speed;
-	// }
-	// else
-	// {
-	//   velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-	// }
 
-	// Velocity = velocity;
-	// MoveAndSlide();
+    Velocity = velocity;
+    MoveAndSlide();
   }
 }
