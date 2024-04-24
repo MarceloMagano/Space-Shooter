@@ -3,15 +3,18 @@ using System;
 
 public partial class game : Node
 {
-  Node2D player;
+  player player;
   Marker2D playerSpawnPos;
+  Node2D laserContainer;
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
   {
-    player = GetTree().GetFirstNodeInGroup("player") as Node2D;
+    player = GetTree().GetFirstNodeInGroup("player") as player;
     playerSpawnPos = GetNode<Marker2D>("PlayerSpawnPos");
+    laserContainer = GetNode<Node2D>("LaserContainer");
     player.GlobalPosition = playerSpawnPos.GlobalPosition;
+    player.LaserShot += OnPlayerLaserShot;
   }
 
   // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,5 +28,12 @@ public partial class game : Node
     {
       GetTree().ReloadCurrentScene();
     }
+  }
+
+  private void OnPlayerLaserShot(PackedScene laser_scene, Vector2 location)
+  {
+    var laser = laser_scene.Instantiate() as laser;
+    laser.GlobalPosition = location;
+    laserContainer.AddChild(laser);
   }
 }

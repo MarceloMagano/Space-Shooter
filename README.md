@@ -1,3 +1,4 @@
 # Space Shooter game with godot
 
-https://www.youtube.com/watch?v=QoNukqpolS8
+Coding [along](https://www.youtube.com/watch?v=QoNukqpolS8) but using C#
+

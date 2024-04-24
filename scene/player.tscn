@@ -15,3 +15,6 @@ texture = ExtResource("1_nsymj")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-283, -752.8)
 polygon = PackedVector2Array(247, 741, 251, 741, 254, 745, 257, 745, 272, 738, 275, 719, 288, 719, 291, 736, 306, 746, 310, 745, 313, 742, 317, 741, 316, 764, 312, 764, 311, 762, 293, 765, 288, 773, 277, 773, 272, 766, 256, 762, 253, 760, 252, 763, 249, 763)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(0, -45)
