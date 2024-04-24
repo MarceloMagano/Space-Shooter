@@ -1,32 +1,26 @@
 using Godot;
-using System;
 
-public partial class player : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
   [Export]
   public const float Speed = 300.0f;
-  public const float JumpVelocity = -400.0f;
 
   // createing a signal/event that will allow to shot the laser
 
   [Signal]
   public delegate void LaserShotEventHandler(PackedScene laserScene, Vector2 location);
 
-  // Get the gravity from the project settings to be synced with RigidBody nodes.
-  public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+  PackedScene _laserScene = GD.Load<PackedScene>("res://scene/laser.tscn");
+  Marker2D _muzzle;
 
-
-  PackedScene laserScene = GD.Load<PackedScene>("res://scene/laser.tscn");
-  Marker2D muzzle;
-
-  private bool shootCooldown = false;
-  private const double rateOfFire = 0.25;
+  private bool _shootCooldown;
+  private const double RateOfFire = 0.25;
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
   {
     base._Ready();
-    muzzle = GetNode<Marker2D>("Muzzle");
+    _muzzle = GetNode<Marker2D>("Muzzle");
   }
 
   public override async void _Process(double delta)
@@ -34,12 +28,12 @@ public partial class player : CharacterBody2D
 
     if (Input.IsActionPressed("shoot"))
     {
-      if (!shootCooldown)
+      if (!_shootCooldown)
       {
-        shootCooldown = true;
+        _shootCooldown = true;
         Shoot();
-        await ToSignal(GetTree().CreateTimer(rateOfFire), "timeout");
-        shootCooldown = false;
+        await ToSignal(GetTree().CreateTimer(RateOfFire), "timeout");
+        _shootCooldown = false;
       }
     }
   }
@@ -55,9 +49,9 @@ public partial class player : CharacterBody2D
     MoveAndSlide();
   }
 
-  public void Shoot()
+  private void Shoot()
   {
     // emits the signal/event
-    EmitSignal(SignalName.LaserShot, laserScene, muzzle.GlobalPosition);
+    EmitSignal(SignalName.LaserShot, _laserScene, _muzzle.GlobalPosition);
   }
 }

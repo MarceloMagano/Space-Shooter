@@ -1,7 +1,6 @@
 using Godot;
-using System;
 
-public partial class laser : Area2D
+public partial class Laser : Area2D
 {
   [Export]
   public const float Speed = 600;

@@ -1,20 +1,19 @@
 using Godot;
-using System;
 
-public partial class game : Node
+public partial class Game : Node
 {
-  player player;
-  Marker2D playerSpawnPos;
-  Node2D laserContainer;
+  Player _player;
+  Marker2D _playerSpawnPos;
+  Node2D _laserContainer;
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
   {
-    player = GetTree().GetFirstNodeInGroup("player") as player;
-    playerSpawnPos = GetNode<Marker2D>("PlayerSpawnPos");
-    laserContainer = GetNode<Node2D>("LaserContainer");
-    player.GlobalPosition = playerSpawnPos.GlobalPosition;
-    player.LaserShot += OnPlayerLaserShot;
+    _player = GetTree().GetFirstNodeInGroup("player") as Player;
+    _playerSpawnPos = GetNode<Marker2D>("PlayerSpawnPos");
+    _laserContainer = GetNode<Node2D>("LaserContainer");
+    _player!.GlobalPosition = _playerSpawnPos.GlobalPosition;
+    _player.LaserShot += OnPlayerLaserShot;
   }
 
   // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,10 +29,10 @@ public partial class game : Node
     }
   }
 
-  private void OnPlayerLaserShot(PackedScene laser_scene, Vector2 location)
+  private void OnPlayerLaserShot(PackedScene laserScene, Vector2 location)
   {
-    var laser = laser_scene.Instantiate() as laser;
-    laser.GlobalPosition = location;
-    laserContainer.AddChild(laser);
+    var laser = laserScene.Instantiate() as Laser;
+    laser!.GlobalPosition = location;
+    _laserContainer.AddChild(laser);
   }
 }
