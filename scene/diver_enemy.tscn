@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgog4md6qir3w"]
+
+[ext_resource type="PackedScene" uid="uid://jppmg1yuhst6" path="res://scene/enemy.tscn" id="1_sq8kl"]
+[ext_resource type="Texture2D" uid="uid://3cpyfbyh7kj7" path="res://assets/textures/spaceShips_004.png" id="3_23b80"]
+
+[node name="DiverEnemy" instance=ExtResource("1_sq8kl")]
+Speed = 400.0
+HP = 1.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("3_23b80")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-13.4783, -6.95652, -15.6522, 4.34783, -10.4348, 12.6087, -5.21739, 13.0435, -5.21739, 6.52174, -5.65217, 3.04348, -4.34783, 4.78261, -2.6087, 7.3913, 2.6087, 7.3913, 3.91304, 4.78261, 5.21739, 3.47826, 4.78261, 5.65217, 4.78261, 13.0435, 10, 12.6087, 15.6522, 4.78261, 13.0435, -6.52174, 10.4348, -12.6087, -10.4348, -13.0435)

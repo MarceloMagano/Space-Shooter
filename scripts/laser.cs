@@ -3,8 +3,10 @@ using Godot;
 public partial class Laser : Area2D
 {
   [Export]
-  public const float Speed = 600;
+  float Speed; // defined in the editor
 
+  [Export]
+  int Damange; // defined in the editor
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
@@ -22,10 +24,7 @@ public partial class Laser : Area2D
   /// <summary>
   /// Makes the Laser disappear when it exits the screen.
   /// </summary>
-  private void _on_visible_on_screen_enabler_2d_screen_exited()
-  {
-    QueueFree();
-  }
+  private void _on_visible_on_screen_enabler_2d_screen_exited() => QueueFree();
 
   /// <summary>
   /// When the laser collides with an enemy, it will die and the Laser disappears
@@ -34,7 +33,7 @@ public partial class Laser : Area2D
   {
     if (area is Enemy enemy)
     {
-      enemy.Die();
+      enemy.TakeDamage(Damange);
       QueueFree();
     }
   }

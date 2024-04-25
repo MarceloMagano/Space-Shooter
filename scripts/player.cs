@@ -4,7 +4,7 @@ using Godot;
 public partial class Player : CharacterBody2D
 {
   [Export]
-  public const float Speed = 300.0f;
+  float Speed; // defined in the editor
 
   // createing a signal/event that will allow to shot the laser
 
@@ -61,9 +61,6 @@ public partial class Player : CharacterBody2D
   /// <summary>
   /// Make the player disappear.
   /// </summary>
-  internal void Die()
-  {
-    QueueFree();
-  }
+  internal void Die() => QueueFree();
 
 }

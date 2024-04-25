@@ -1,10 +1,13 @@
+using System;
 using Godot;
 
 public partial class Enemy : Area2D
 {
 
   [Export]
-  public const float Speed = 150.0f;
+  float Speed; // defined in the editor
+  [Export]
+  float HP; // defined in the editor
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
@@ -27,10 +30,7 @@ public partial class Enemy : Area2D
   /// <summary>
   /// Make the enemy disappear.
   /// </summary>
-  internal void Die()
-  {
-    QueueFree();
-  }
+  internal void Die() => QueueFree();
 
   /// <summary>
   /// When the enemy collides with the player, it will die and the player also dies
@@ -47,9 +47,12 @@ public partial class Enemy : Area2D
   /// <summary>
   /// Makes the enemy disappear when it exits the screen.
   /// </summary>
-  private void _on_visible_on_screen_notifier_2d_screen_exited()
-  {
-    QueueFree();
-  }
+  private void _on_visible_on_screen_notifier_2d_screen_exited() => QueueFree();
 
+  internal void TakeDamage(int amount)
+  {
+    HP -= amount;
+    if (HP <= 0)
+      Die();
+  }
 }

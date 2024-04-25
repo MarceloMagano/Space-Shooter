@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_wqb2c"]
 [ext_resource type="PackedScene" uid="uid://cwgelkeyumfbr" path="res://scene/player.tscn" id="2_mibjd"]
-[ext_resource type="PackedScene" uid="uid://dgwd08y7aemco" path="res://scene/laser.tscn" id="3_g25gj"]
+[ext_resource type="PackedScene" uid="uid://dgog4md6qir3w" path="res://scene/diver_enemy.tscn" id="4_fpbjn"]
 [ext_resource type="PackedScene" uid="uid://jppmg1yuhst6" path="res://scene/enemy.tscn" id="4_i5sob"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wqb2c")
+_enemyScenes = Array[PackedScene]([ExtResource("4_i5sob"), ExtResource("4_fpbjn")])
 
 [node name="Player" parent="." instance=ExtResource("2_mibjd")]
 position = Vector2(428, 469)
@@ -14,10 +15,11 @@ position = Vector2(428, 469)
 [node name="PlayerSpawnPos" type="Marker2D" parent="."]
 position = Vector2(270, 850)
 
-[node name="Laser" parent="." instance=ExtResource("3_g25gj")]
-position = Vector2(63, 871)
-
 [node name="LaserContainer" type="Node2D" parent="."]
 
-[node name="Enemy" parent="." instance=ExtResource("4_i5sob")]
-position = Vector2(264, 61)
+[node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
