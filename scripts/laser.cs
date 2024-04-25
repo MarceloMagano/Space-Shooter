@@ -3,10 +3,10 @@ using Godot;
 public partial class Laser : Area2D
 {
   [Export]
-  float Speed; // defined in the editor
+  internal float Speed; // defined in the editor
 
   [Export]
-  int Damange; // defined in the editor
+  internal int Damange; // defined in the editor
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()

@@ -4,10 +4,9 @@ using Godot;
 public partial class Player : CharacterBody2D
 {
   [Export]
-  float Speed; // defined in the editor
+  internal float Speed; // defined in the editor
 
   // createing a signal/event that will allow to shot the laser
-
   [Signal]
   public delegate void LaserShotEventHandler(PackedScene laserScene, Vector2 location);
 
@@ -21,7 +20,6 @@ public partial class Player : CharacterBody2D
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
   {
-    base._Ready();
     _muzzle = GetNode<Marker2D>("Muzzle");
   }
 
@@ -50,6 +48,8 @@ public partial class Player : CharacterBody2D
       Y = direction.Y * Speed
     };
     MoveAndSlide();
+
+    GlobalPosition = GlobalPosition.Clamp(Vector2.Zero, GetViewportRect().Size);
   }
 
   private void Shoot()

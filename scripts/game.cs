@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Game : Node
@@ -6,10 +7,19 @@ public partial class Game : Node
   Marker2D _playerSpawnPos;
   Node2D _laserContainer;
   Node2D _enemyContainer;
-
+  Hud _hud;
 
   [Export]
   PackedScene[] _enemyScenes; // an array of enemy scenes defined in the editor
+
+  private int _score = 0;
+  public int Score { get => _score; set => SetScore(value); }
+
+  private void SetScore(int score)
+  {
+    _score = score;
+    _hud.Score = _score;
+  }
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
@@ -20,6 +30,8 @@ public partial class Game : Node
     _player!.GlobalPosition = _playerSpawnPos.GlobalPosition;
     _player.LaserShot += OnPlayerLaserShot;
     _enemyContainer = GetNode<Node2D>("EnemyContainer");
+    _hud = GetNode("UILayer").GetChild<Hud>(0);
+    Score = _score;
   }
 
   // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,6 +59,14 @@ public partial class Game : Node
     var enemyScene = _enemyScenes[GD.Randi() % _enemyScenes.Length];
     var enemy = enemyScene.Instantiate() as Enemy;
     enemy!.GlobalPosition = new Vector2(GD.RandRange(50, 500), -50);
+    enemy.EnemyKilled += OnEnemyKilled;
     _enemyContainer.AddChild(enemy);
   }
+
+  private void OnEnemyKilled(int score)
+  {
+    Score += score;
+    GD.Print("Score: " + _score);
+  }
+
 }

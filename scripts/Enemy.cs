@@ -3,11 +3,15 @@ using Godot;
 
 public partial class Enemy : Area2D
 {
+  [Export]
+  internal float Speed; // defined in the editor
+  [Export]
+  internal float HP; // defined in the editor
+  [Export]
+  internal int Score = 100;
 
-  [Export]
-  float Speed; // defined in the editor
-  [Export]
-  float HP; // defined in the editor
+  [Signal]
+  public delegate void EnemyKilledEventHandler(int score);
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
@@ -53,6 +57,9 @@ public partial class Enemy : Area2D
   {
     HP -= amount;
     if (HP <= 0)
+    {
+      EmitSignal(SignalName.EnemyKilled, Score);
       Die();
+    }
   }
 }
