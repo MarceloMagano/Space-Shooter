@@ -12,6 +12,8 @@ public partial class Enemy : Area2D
 
   [Signal]
   public delegate void EnemyKilledEventHandler(int score);
+  [Signal]
+  public delegate void EnemyHitEventHandler();
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
@@ -60,6 +62,10 @@ public partial class Enemy : Area2D
     {
       EmitSignal(SignalName.EnemyKilled, Score);
       Die();
+    }
+    else
+    {
+      EmitSignal(SignalName.EnemyHit);
     }
   }
 }
