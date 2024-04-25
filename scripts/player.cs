@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Player : CharacterBody2D
@@ -10,6 +11,7 @@ public partial class Player : CharacterBody2D
   [Signal]
   public delegate void LaserShotEventHandler(PackedScene laserScene, Vector2 location);
 
+  // loads the laser scene
   PackedScene _laserScene = GD.Load<PackedScene>("res://scene/laser.tscn");
   Marker2D _muzzle;
 
@@ -25,9 +27,9 @@ public partial class Player : CharacterBody2D
 
   public override async void _Process(double delta)
   {
-
     if (Input.IsActionPressed("shoot"))
     {
+      // it keeps shooting the laser with some cooldown between each shot until the key/action is released
       if (!_shootCooldown)
       {
         _shootCooldown = true;
@@ -40,6 +42,7 @@ public partial class Player : CharacterBody2D
 
   public override void _PhysicsProcess(double delta)
   {
+    // updates the direction of the player based on the input
     var direction = new Vector2(Input.GetAxis("move_left", "move_right"), Input.GetAxis("move_up", "move_down"));
     Velocity = Velocity with
     {
@@ -54,4 +57,13 @@ public partial class Player : CharacterBody2D
     // emits the signal/event
     EmitSignal(SignalName.LaserShot, _laserScene, _muzzle.GlobalPosition);
   }
+
+  /// <summary>
+  /// Make the player disappear.
+  /// </summary>
+  internal void Die()
+  {
+    QueueFree();
+  }
+
 }

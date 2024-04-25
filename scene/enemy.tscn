@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://jppmg1yuhst6"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_3v0sa"]
+[ext_resource type="Texture2D" uid="uid://c1518wbja6dd" path="res://assets/textures/spaceShips_001.png" id="1_hln2f"]
+
+[node name="Enemy" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_3v0sa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_hln2f")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(2.3, 2.3)
+polygon = PackedVector2Array(-11.7391, -9.13043, -15.2174, 5.21739, -8.26087, 12.1739, -6.08696, 10.4348, -5.21739, 5.21739, -5.65217, 3.04348, -4.34783, 1.30435, -2.6087, 7.3913, 2.6087, 7.3913, 4.34783, 1.73913, 5.65217, 3.47826, 4.78261, 5.65217, 6.08696, 10.4348, 8.26087, 11.7391, 15.2174, 4.78261, 11.7391, -8.69565, 6.52174, -11.3043, -6.52174, -11.3043)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -46)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
