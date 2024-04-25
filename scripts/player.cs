@@ -9,6 +9,8 @@ public partial class Player : CharacterBody2D
   // createing a signal/event that will allow to shot the laser
   [Signal]
   public delegate void LaserShotEventHandler(PackedScene laserScene, Vector2 location);
+  [Signal]
+  public delegate void PlayerDiedEventHandler();
 
   // loads the laser scene
   PackedScene _laserScene = GD.Load<PackedScene>("res://scene/laser.tscn");
@@ -61,6 +63,9 @@ public partial class Player : CharacterBody2D
   /// <summary>
   /// Make the player disappear.
   /// </summary>
-  internal void Die() => QueueFree();
-
+  internal void Die()
+  {
+    EmitSignal(SignalName.PlayerDied);
+    QueueFree();
+  }
 }
