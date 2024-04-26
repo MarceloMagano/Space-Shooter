@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://q32h3xv77hs1"]
+
+[ext_resource type="PackedScene" uid="uid://jppmg1yuhst6" path="res://scene/enemy.tscn" id="1_v7wfs"]
+[ext_resource type="Texture2D" uid="uid://dv3c2ai8i270s" path="res://assets/textures/spaceShips_007.png" id="2_odvgr"]
+
+[node name="JugEnemy" instance=ExtResource("1_v7wfs")]
+Speed = 75.0
+HP = 4.0
+Score = 500
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_odvgr")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-12.6087, -17.3913, -15.2174, -15.6522, -13.4783, -4.34783, -10.4348, 1.30435, -18.6957, 9.13043, -18.6957, 16.087, -13.0435, 16.5217, -8.26087, 11.3043, -4.34783, 11.3043, -4.34783, 7.3913, 4.34783, 7.3913, 4.34783, 11.3043, 8.69565, 11.3043, 13.913, 16.9565, 19.1304, 16.087, 18.2609, 9.13043, 10.8696, 0.869565, 13.913, -3.91304, 15.2174, -15.6522, 12.6087, -16.5217, 6.52174, -12.6087, -6.52174, -12.6087)

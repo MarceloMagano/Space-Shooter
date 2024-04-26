@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://5enoj447vvwv"]
+[gd_scene load_steps=14 format=3 uid="uid://5enoj447vvwv"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_wqb2c"]
 [ext_resource type="PackedScene" uid="uid://cwgelkeyumfbr" path="res://scene/player.tscn" id="2_mibjd"]
 [ext_resource type="AudioStream" uid="uid://cyyydy05fivsp" path="res://assets/audio/laser.ogg" id="4_66kgm"]
 [ext_resource type="PackedScene" uid="uid://dgog4md6qir3w" path="res://scene/diver_enemy.tscn" id="4_fpbjn"]
+[ext_resource type="PackedScene" uid="uid://q32h3xv77hs1" path="res://scene/jug_enemy.tscn" id="4_gy8bp"]
 [ext_resource type="PackedScene" uid="uid://jppmg1yuhst6" path="res://scene/enemy.tscn" id="4_i5sob"]
 [ext_resource type="PackedScene" uid="uid://igi6e70ys5ed" path="res://scene/hud.tscn" id="5_8kto7"]
 [ext_resource type="PackedScene" uid="uid://dw8umwa3dmrv5" path="res://scene/game_over_screen.tscn" id="5_ix07y"]
@@ -24,7 +25,7 @@ gravity = Vector3(0, 0, 0)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wqb2c")
-_enemyScenes = Array[PackedScene]([ExtResource("4_i5sob"), ExtResource("4_fpbjn")])
+_enemyScenes = Array[PackedScene]([ExtResource("4_i5sob"), ExtResource("4_fpbjn"), ExtResource("4_gy8bp")])
 
 [node name="SFX" type="Node" parent="."]
 
